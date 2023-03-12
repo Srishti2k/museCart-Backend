@@ -1,17 +1,20 @@
-const products = require('../models/product')
+/* logics of all callback functions , which we will use in routes */
 
-const getAllProductsStatic = async (req,res)=>{
-    //throw new Error('testing async errors')
-    const product = await products.find({featured: true})
-    res.status(200).json({product , nhbits: product.length})
-   
+const Products = require("../models/products");
+const asyncWrapper = require('../middleware/asyncwrapper')
+
+//get
+const getproducts = async (req, res) => {
+    const products = await Products.find({})
+    res.json({ products })
+  
 }
-const getAllProducts = async (req,res)=>{
-    console.log(req.query)
-    const product = await products.find(req.query)
-    res.status(200).json({product , nhbits: product.length})
-}
-module.exports= {
-    getAllProducts,
-    getAllProductsStatic
-}
+//post
+const createProducts = asyncWrapper (async (req, res) => {
+        const products = await Products.create(req.body)
+        res.status(200).json({ products })
+})
+
+module.exports = { getproducts, createProducts }
+//now send this to routes
+

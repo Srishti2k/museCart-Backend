@@ -1,9 +1,8 @@
 const express= require('express')
-const router = express.Router()
+const router = express.Router(); 
+const {createProducts, getproducts}= require('../controllers/products')
 
-const { getAllProducts, getAllProductsStatic} = require('../controllers/products')
-
-router.route('/').get(getAllProducts)
-router.route('/static').get(getAllProductsStatic)
-
-module.exports= router
+router.route('/').post(createProducts)
+router.route('/getAllProducts').get(getproducts)
+module.exports = router
+//now send this to main app.js
