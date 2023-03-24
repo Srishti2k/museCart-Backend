@@ -4,6 +4,7 @@ const asyncWrapper = (controller) => {
     try {
       await controller(req, res, next);
     } catch (error) {
+      res.status(500).json({"message": "Invalid Category"})
       next(error);
     }
   };

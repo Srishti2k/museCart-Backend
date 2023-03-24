@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const connectDB = require("./db/connect");
 
 //step4 middlewares
+app.use(morgan('dev')); //When you start the server and send a request to one of the defined API endpoints, you should see a log message in the console that includes the requested URL.
 app.use(bodyParser.json());
 
 //step2 public saved variables
@@ -35,3 +37,6 @@ const start = async () => {
   }
 };
 start();
+
+
+

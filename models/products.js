@@ -12,10 +12,53 @@ const productSchema = new mongoose.Schema({
     required: [true, "must provide name"],
     trim: true,
   },
-  completed: {
-    type: Boolean,
-    default: false,
+  description: {
+    type: String,
+    required: true,
+    default: '',
   },
+  richDescription: {
+    type: String,
+    required: true,
+    default: '',
+  },
+  image: {
+    type: String,
+  },
+  images: [
+    {
+      type: String,
+    },
+  ],
+  brand: {
+    type: String,
+  },
+  price: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  isFeatured: { type: Boolean, default: false },
+  dateCreated: {
+    type: Date,
+    required: true,
+    default: Date.now(),
+  },
+  countInStock:{
+    type: Number,
+    required: true,
+    min: 0,
+    max: 255,
+  },
+  category:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+  }
 });
 //5. will grab this model in controllers
 module.exports = mongoose.model("Product", productSchema);
